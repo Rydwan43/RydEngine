@@ -1,0 +1,68 @@
+# Build directories
+build/
+out/
+cmake-build-*/
+.vs/
+.idea/
+.vscode/
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.app
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+Makefile
+*.cmake
+
+# IDE specific files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Debug files
+*.pdb
+*.ilk
+*.exp
+*.idb
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# Dependencies (if you want to ignore vendor folder, uncomment next line)
+# vendor/
+
+# Custom project files
+Assets/Temp/
+*.bak 
