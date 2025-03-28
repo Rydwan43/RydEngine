@@ -17,7 +17,7 @@ public:
     Vector3 GetRotation() const { return rotation; }
     Vector3 GetScale() const { return scale; }
 
-    void SetPosition(Vector3 pos) { position = pos; }
+    virtual void SetPosition(Vector3 pos) { position = pos; }
     void SetRotation(Vector3 rot) { rotation = rot; }
     void SetScale(Vector3 scl) { scale = scl; }
 };
