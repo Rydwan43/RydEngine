@@ -1,14 +1,14 @@
 #pragma once
-#include "StaticBody.hpp"
+#include "../GameObject.hpp"
 
-class Cube : public StaticBody
+class Cube : public GameObject
 {
 private:
     float size;
 
 public:
     Cube(Vector3 pos, float cubeSize = 1.0f, Color col = WHITE)
-        : StaticBody(pos, col), size(cubeSize)
+        : GameObject(pos, col), size(cubeSize)
     {
         UpdateBounds();
     }

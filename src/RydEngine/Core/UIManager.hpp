@@ -1,6 +1,6 @@
 #pragma once
 #include "imgui.h"
-#include "Entities/StaticBody.hpp"
+#include "Entities/GameObject.hpp"
 #include <vector>
 #include <memory>
 
@@ -23,10 +23,10 @@ class UIManager
 {
 private:
     ShapeParams &params;
-    std::vector<std::unique_ptr<StaticBody>> &entities;
+    std::vector<std::unique_ptr<GameObject>> &entities;
 
 public:
-    UIManager(ShapeParams &shapeParams, std::vector<std::unique_ptr<StaticBody>> &entityList)
+    UIManager(ShapeParams &shapeParams, std::vector<std::unique_ptr<GameObject>> &entityList)
         : params(shapeParams), entities(entityList) {}
 
     void Draw()

@@ -10,6 +10,8 @@ public:
     {
         rlImGuiSetup(true); // Use docking
         ImGuiTheme::SetupImGuiStyle();
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable keyboard controls
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable gamepad controls
     }
 
     ~ImGuiManager()
@@ -20,6 +22,7 @@ public:
     void BeginFrame()
     {
         rlImGuiBegin();
+        ImGui::ShowDemoWindow();
     }
 
     void EndFrame()

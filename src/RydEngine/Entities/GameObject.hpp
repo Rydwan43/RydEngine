@@ -1,20 +1,20 @@
 #pragma once
 #include "../Core/Entity.hpp"
 
-class StaticBody : public Entity
+class GameObject : public Entity
 {
 protected:
     Color color;
     BoundingBox bounds;
 
 public:
-    StaticBody(Vector3 pos, Color col = WHITE) : color(col)
+    GameObject(Vector3 pos, Color col = WHITE) : color(col)
     {
         position = pos;
     }
 
     virtual void UpdateBounds() = 0;
     virtual BoundingBox GetBounds() const { return bounds; }
-    virtual void Draw() = 0;
-    virtual ~StaticBody() noexcept override = default;
+    virtual void Draw() override = 0;
+    virtual ~GameObject() noexcept override = default;
 };

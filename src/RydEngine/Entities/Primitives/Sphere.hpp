@@ -1,7 +1,7 @@
 #pragma once
-#include "StaticBody.hpp"
+#include "../GameObject.hpp"
 
-class Sphere : public StaticBody
+class Sphere : public GameObject
 {
 private:
     float radius;
@@ -9,7 +9,7 @@ private:
 
 public:
     Sphere(Vector3 pos, float rad = 1.0f, int segs = 16, Color col = WHITE)
-        : StaticBody(pos, col), radius(rad), segments(segs)
+        : GameObject(pos, col), radius(rad), segments(segs)
     {
         UpdateBounds();
     }

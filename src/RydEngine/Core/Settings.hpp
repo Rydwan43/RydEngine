@@ -15,8 +15,8 @@ public:
     bool resizeable;
     bool showFPS;
 
-    Settings() : resolutionX(1024),
-                 resolutionY(798),
+    Settings() : resolutionX(1536),
+                 resolutionY(960),
                  title("RydEngine"),
                  targetFPS(60),
                  vSync(false),
