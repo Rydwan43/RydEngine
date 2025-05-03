@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     ImGui::GetIO().ConfigWindowsMoveFromTitleBarOnly = true;
 
     ImageViewer.Setup();
-    ImageViewer.Open = true;
+    ImageViewer.Open = false;
 
     // BspViewer.Setup();
     // BspViewer.Open = true;

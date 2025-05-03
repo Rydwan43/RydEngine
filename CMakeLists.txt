@@ -7,9 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Find raylib
 find_package(raylib REQUIRED)
 
-# Add ImGui and rlImGui source files
+# Add ImGui, rlImGui and ENTT source files
 set(IMGUI_DIR ${PROJECT_SOURCE_DIR}/vendor/imgui)
 set(RLIMGUI_DIR ${PROJECT_SOURCE_DIR}/vendor/rlImGui)
+set(ENTT_DIR ${PROJECT_SOURCE_DIR}/vendor/entt)
 
 set(IMGUI_SOURCES
     ${IMGUI_DIR}/imgui.cpp
@@ -31,6 +32,7 @@ target_include_directories(RydEngine PRIVATE
     ${PROJECT_SOURCE_DIR}/src/RydEngine
     ${IMGUI_DIR}
     ${RLIMGUI_DIR}
+    ${ENTT_DIR}
 )
 
 # Link libraries
@@ -39,4 +41,4 @@ target_link_libraries(RydEngine PRIVATE
 )
 
 # Copy assets to build directory
-file(COPY ${PROJECT_SOURCE_DIR}/Assets DESTINATION ${CMAKE_BINARY_DIR}) 
+file(COPY ${PROJECT_SOURCE_DIR}/Assets DESTINATION ${CMAKE_BINARY_DIR})

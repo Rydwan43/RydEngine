@@ -1,0 +1,9 @@
+#pragma once
+#include "raylib.h"
+
+struct TransformComponent
+{
+    Vector3 position = {0, 0, 0};
+    Vector3 rotation = {0, 0, 0}; // Euler angles in degrees
+    Vector3 scale = {1, 1, 1};
+};
