@@ -7,13 +7,13 @@
 
 #include "DocumentWindow.hpp"
 #include "../Helpers/DpiScaling.hpp"
-#include "../Entities/BSP.hpp"
+#include "../World/BSP.hpp"
 
 #include <filesystem>
 #include <set>
 #include <vector>
 
-class SceneViewWindow : public DocumentWindow
+class BspViewerWindow : public DocumentWindow
 {
 protected:
     Vector3 position;
@@ -28,6 +28,11 @@ public:
     Camera3D Camera = {0};
     std::string currentFile = "/Assets/Maps/BSP/dm4.bsp";
     std::vector<Model> models;
+
+    BspViewerWindow()
+        : DocumentWindow()
+    {
+    }
 
     void Setup() override
     {
@@ -60,7 +65,7 @@ public:
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
         ImGui::SetNextWindowSizeConstraints(ImVec2(ScaleToDPIF(400.0f), ScaleToDPIF(400.0f)), ImVec2((float)GetScreenWidth(), (float)GetScreenHeight()));
 
-        if (ImGui::Begin("3D View", &Open, ImGuiWindowFlags_NoScrollbar))
+        if (ImGui::Begin("BSP View", &Open, ImGuiWindowFlags_NoScrollbar))
         {
 
             ImGui::Text("FPS: %i", GetFPS());
@@ -142,10 +147,7 @@ public:
             UnloadDroppedFiles(droppedFiles);
         }
 
-        if (IsKeyPressed(KEY_R))
-            Camera.up = {0.0, 1.0, 0.0};
-
-        if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+        if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT) && Focused)
         {
             SetMouseCursor(MOUSE_CURSOR_CROSSHAIR);
             Vector2 mouseDelta = GetMouseDelta();
