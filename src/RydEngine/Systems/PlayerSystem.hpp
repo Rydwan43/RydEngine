@@ -19,13 +19,14 @@ public:
             auto &player = view.get<PlayerComponent>(entity);
             auto &camComp = view.get<CameraComponent>(entity);
 
-            // Mouse look
             Vector2 mouseDelta = GetMouseDelta();
-            player.yaw -= mouseDelta.x * player.mouseSensitivity;
-            player.pitch -= mouseDelta.y * player.mouseSensitivity;
-            player.pitch = Clamp(player.pitch, -89.0f, 89.0f);
+            if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
+            {
+                player.yaw -= mouseDelta.x * player.mouseSensitivity;
+                player.pitch -= mouseDelta.y * player.mouseSensitivity;
+                player.pitch = Clamp(player.pitch, -89.0f, 89.0f);
+            }
 
-            // Calculate forward/right direction from yaw/pitch
             Vector3 front = {
                 cosf(DEG2RAD * player.pitch) * sinf(DEG2RAD * player.yaw),
                 sinf(DEG2RAD * player.pitch),
@@ -34,7 +35,6 @@ public:
 
             Vector3 right = Vector3Normalize(Vector3CrossProduct(front, {0.0f, 1.0f, 0.0f}));
 
-            // Movement input
             Vector3 velocity = {0};
             if (IsKeyDown(KEY_W))
                 velocity = Vector3Add(velocity, front);
@@ -49,7 +49,6 @@ public:
             velocity = Vector3Scale(velocity, player.moveSpeed * deltaTime);
             transform.position = Vector3Add(transform.position, velocity);
 
-            // Update camera to follow player
             camComp.camera.position = Vector3Add(transform.position, camComp.offset);
             camComp.camera.target = Vector3Add(camComp.camera.position, front);
         }
