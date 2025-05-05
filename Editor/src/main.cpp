@@ -5,21 +5,18 @@
 #include "rlImGui.h"
 #include "rlImGuiColors.h"
 
-#include "Editor/ImGuiTheme.hpp"
-
 #include "Views/DocumentWindow.hpp"
 #include "Views/ImageViewerWindow.hpp"
-#include "Views/BspViewerWindow.hpp"
 #include "Views/SceneViewWindow.hpp"
 
 #include "Helpers/DpiScaling.hpp"
+#include "Helpers/ImGuiTheme.hpp"
 
 bool Quit = false;
 
 bool ImGuiDemoOpen = false;
 
 ImageViewerWindow ImageViewer;
-BspViewerWindow BspViewer;
 SceneViewWindow SceneView;
 
 void DoMainMenu()
@@ -38,7 +35,6 @@ void DoMainMenu()
         {
             ImGui::MenuItem("ImGui Demo", nullptr, &ImGuiDemoOpen);
             ImGui::MenuItem("Image Viewer", nullptr, &ImageViewer.Open);
-            // ImGui::MenuItem("3D View", nullptr, &BspViewer.Open);
             ImGui::MenuItem("Scene View", nullptr, &SceneView.Open);
 
             ImGui::EndMenu();
@@ -56,8 +52,8 @@ int main(int argc, char *argv[])
 
     // do not set the FLAG_WINDOW_HIGHDPI flag, that scales a low res framebuffer up to the native resolution.
     // use the native resolution and scale your geometry. FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT |
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(screenWidth, screenHeight, "RydEngine 0.0.1");
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
+    InitWindow(screenWidth, screenHeight, "RydEngine 0.0.2");
     SetExitKey(0);
     SetTargetFPS(60);
     rlImGuiSetup(true);
@@ -66,9 +62,6 @@ int main(int argc, char *argv[])
 
     ImageViewer.Setup();
     ImageViewer.Open = false;
-
-    // BspViewer.Setup();
-    // BspViewer.Open = true;
 
     SceneView.Setup();
     SceneView.Open = true;
@@ -84,6 +77,9 @@ int main(int argc, char *argv[])
 
         BeginDrawing();
         ClearBackground(DARKGRAY);
+        // draw fps
+        DrawText(TextFormat("FPS: %i", GetFPS()), 10, 30, 20, WHITE);
+        DrawText(TextFormat("Window Size: %i x %i", GetScreenWidth(), GetScreenHeight()), 10, 50, 20, WHITE);
 
         rlImGuiBegin();
 #ifdef IMGUI_HAS_DOCK
@@ -96,12 +92,6 @@ int main(int argc, char *argv[])
 
         if (ImageViewer.Open)
             ImageViewer.Show();
-
-        // if (BspViewer.Open)
-        // {
-        //     BspViewer.Update();
-        //     BspViewer.Show();
-        // }
 
         if (SceneView.Open)
         {
@@ -117,10 +107,8 @@ int main(int argc, char *argv[])
     rlImGuiShutdown();
 
     ImageViewer.Shutdown();
-    BspViewer.Shutdown();
     SceneView.Shutdown();
 
-    // De-Initialization
     //--------------------------------------------------------------------------------------
     CloseWindow(); // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

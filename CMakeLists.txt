@@ -4,41 +4,22 @@ project(RydEngine)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Find raylib
 find_package(raylib REQUIRED)
 
-# Add ImGui, rlImGui and ENTT source files
-set(IMGUI_DIR ${PROJECT_SOURCE_DIR}/vendor/imgui)
-set(RLIMGUI_DIR ${PROJECT_SOURCE_DIR}/vendor/rlImGui)
-set(ENTT_DIR ${PROJECT_SOURCE_DIR}/vendor/entt)
-
-set(IMGUI_SOURCES
-    ${IMGUI_DIR}/imgui.cpp
-    ${IMGUI_DIR}/imgui_demo.cpp
-    ${IMGUI_DIR}/imgui_draw.cpp
-    ${IMGUI_DIR}/imgui_tables.cpp
-    ${IMGUI_DIR}/imgui_widgets.cpp
-    ${RLIMGUI_DIR}/rlImGui.cpp
-)
-
-# Add source files
-add_executable(RydEngine 
-    src/RydEngine/main.cpp
-    ${IMGUI_SOURCES}
-)
-
-# Include directories
-target_include_directories(RydEngine PRIVATE 
-    ${PROJECT_SOURCE_DIR}/src/RydEngine
-    ${IMGUI_DIR}
-    ${RLIMGUI_DIR}
-    ${ENTT_DIR}
-)
-
-# Link libraries
-target_link_libraries(RydEngine PRIVATE 
-    raylib
-)
-
-# Copy assets to build directory
 file(COPY ${PROJECT_SOURCE_DIR}/Assets DESTINATION ${CMAKE_BINARY_DIR})
+
+# Add shared include paths for all subprojects
+include_directories(
+    ${PROJECT_SOURCE_DIR}/vendor/entt
+    ${PROJECT_SOURCE_DIR}/vendor/imgui
+    ${PROJECT_SOURCE_DIR}/vendor/rlImGui
+)
+
+file(GLOB_RECURSE ENGINE_HEADERS
+    ${PROJECT_SOURCE_DIR}/Engine/*.h
+    ${PROJECT_SOURCE_DIR}/Engine/*.hpp
+)
+
+# Add subprojects
+add_subdirectory(Editor)
+add_subdirectory(Game)
