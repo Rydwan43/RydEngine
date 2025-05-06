@@ -20,7 +20,7 @@ public:
         Camera.offset.y = GetScreenHeight() / 2.0f;
 
         ViewTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
-        ImageTexture = LoadTexture("Assets/Images/miku.jpg");
+        ImageTexture = LoadTexture("Assets/Images/putSomethingHere.png");
 
         UpdateRenderTexture();
     }

@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     // do not set the FLAG_WINDOW_HIGHDPI flag, that scales a low res framebuffer up to the native resolution.
     // use the native resolution and scale your geometry. FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT |
     SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
-    InitWindow(screenWidth, screenHeight, "RydEngine 0.0.2");
+    InitWindow(screenWidth, screenHeight, "RydEngine 0.0.3");
     SetExitKey(0);
     SetTargetFPS(60);
     rlImGuiSetup(true);
